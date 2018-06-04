@@ -1,0 +1,26 @@
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import "~font-awesome/scss/font-awesome.scss";
+
+.navbar {
+  background-color: $navbar-dark-color;
+  padding: .35rem 1rem;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+}
+
+.app-content {
+  flex: 1;
+}
