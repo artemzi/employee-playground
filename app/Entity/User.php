@@ -1,6 +1,6 @@
 <?php
 
-namespace EmployeeDirectory;
+namespace EmployeeDirectory\Entity;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
