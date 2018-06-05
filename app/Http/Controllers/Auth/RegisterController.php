@@ -2,7 +2,7 @@
 
 namespace EmployeeDirectory\Http\Controllers\Auth;
 
-use EmployeeDirectory\User;
+use EmployeeDirectory\Entity\User;
 use EmployeeDirectory\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;

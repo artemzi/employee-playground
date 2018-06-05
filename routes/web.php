@@ -1,5 +1,7 @@
 <?php
 
-Route::get('/', function () {
-    return view('home');
+Route::group([
+    'namespace' => 'Employee',
+], function() {
+    Route::get('/', 'EmployeeController@index')->name('home');
 });
