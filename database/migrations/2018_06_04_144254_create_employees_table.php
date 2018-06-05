@@ -18,7 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->increments('id');
             $table->string('full_name');
             $table->string('title_id')->references('id')->on('title')->onDelete('CASCADE');
-            $table->string('hire_date');
+            $table->integer('hire_date');
             $table->integer('salary');
             NestedSet::columns($table);
         });
