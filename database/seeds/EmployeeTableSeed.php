@@ -1,7 +1,6 @@
 <?php
 
 use EmployeeDirectory\Entity\Employee;
-use EmployeeDirectory\Entity\Title;
 use Illuminate\Database\Seeder;
 
 class EmployeeTableSeed extends Seeder
