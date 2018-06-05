@@ -17,7 +17,7 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('id');
             $table->string('full_name');
-            $table->string('title_id')->references('id')->on('title')->onDelete('CASCADE');
+            $table->integer('title_id')->nullable()->references('id')->on('title')->onDelete('CASCADE');
             $table->integer('hire_date');
             $table->integer('salary');
             NestedSet::columns($table);

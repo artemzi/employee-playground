@@ -13,7 +13,8 @@ class TitleTableSeed extends Seeder
         'Level Five'
     ];
 
-    public function run() {
+    public function run(): void
+    {
         DB::table('titles')->delete();
 
         foreach (self::TITLES as $title) {

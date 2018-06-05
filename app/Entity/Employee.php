@@ -20,17 +20,8 @@ class Employee extends Model
         'full_name', 'hire_date', 'parent_id',
     ];
 
-    protected $hidden = [
-
-    ];
-
     public function title()
     {
         return $this->belongsTo(Title::class);
-    }
-
-    protected function getScopeAttributes(): array
-    {
-        return [ 'title_id' ];
     }
 }
