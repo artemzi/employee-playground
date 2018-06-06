@@ -5,4 +5,5 @@ Route::group([
 ], function() {
     Route::get('/', 'EmployeeController@index')->name('home');
     Route::post('/tree', 'EmployeeController@tree')->name('tree');
+    Route::get('/employees', 'EmployeeController@table')->name('employees');
 });

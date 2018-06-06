@@ -15,11 +15,19 @@ class EmployeeController extends Controller
         return view('home', compact('boss', 'total'));
     }
 
+    public function table(Request $request)
+    {
+        $employees = Employee::paginate(15);
+        return view('employees.index', compact('employees'));
+    }
+
     public function tree(Request $request)
     {
         if ($request->ajax()) {
             // do not show root node. This is a Boss, not employee
-            $employees = Employee::withoutRoot()->get(['id', 'full_name as label', 'title_id', '_lft', '_rgt', 'parent_id']);
+            $employees = Employee::withoutRoot()->get(
+                ['id', 'full_name as label', 'title_id', '_lft', '_rgt', 'parent_id']
+            );
             foreach ($employees as $empl) {
                 $empl['title'] = $empl->title->name;
             }

@@ -13,7 +13,9 @@ class EmployeeTableSeed extends Seeder
     public function run(): void
     { // TODO seed with more data
         factory(Employee::class, 1)->create(
-            ['title_id' => 1]
+            [
+                'title_id' => 1,
+            ]
         )->each(function(Employee $employee) {
             $employee->children()->saveMany(factory(Employee::class, 2)->create(
                 [

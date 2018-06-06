@@ -23,8 +23,17 @@ body {
   flex: 1;
 }
 
-.app-content {
+.employee-content {
+  display: flex;
+  min-height: 85vh;
+  flex-direction: column;
+}
+
+.employee_table {
   flex: 1;
+  table {
+    cursor: pointer;
+  }
 }
 
 .node_title {
