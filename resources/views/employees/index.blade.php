@@ -5,17 +5,21 @@
 @endsection
 
 @section('content')
-    <table class="table table-bordered" id="employees-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Full Name</th>
-                    <th>Title</th>
-                    <th>Hire Date</th>
-                    <th>Salary (RUB)</th>
-                </tr>
-            </thead>
-        </table>
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover" id="employees-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Title</th>
+                        <th>Hire Date</th>
+                        <th>Salary (RUB)</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
 
 @endsection
 

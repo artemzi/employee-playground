@@ -23,17 +23,8 @@ body {
   flex: 1;
 }
 
-.employee-content {
-  display: flex;
-  min-height: 85vh;
-  flex-direction: column;
-}
-
-.employee_table {
-  flex: 1;
-  table {
-    cursor: pointer;
-  }
+table {
+  cursor: pointer;
 }
 
 .node_title {
