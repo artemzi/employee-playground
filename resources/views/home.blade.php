@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    <div id="tree"></div>
+    <hr>
     <p>Total: {{ count($employees) }}</p>
     <table class="table table-bordered table-striped">
         <thead>
