@@ -34,7 +34,7 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'full_name', name: 'full_name' },
-                { data: 'title', name: 'title' },
+                { data: 'title', name: 'title', title: 'Position' },
                 { data: 'hire_date', name: 'hire_date' },
                 { data: 'salary', name: 'salary' },
             ]

@@ -2,6 +2,7 @@
 
 namespace EmployeeDirectory\Http\Controllers\Employee;
 
+use Carbon\Carbon;
 use DataTables;
 use EmployeeDirectory\Entity\Employee;
 use EmployeeDirectory\Http\Controllers\Controller;
@@ -28,14 +29,22 @@ class DatatablesController extends Controller
      */
     public function data(): JsonResponse
     {
-        $model = Employee::query();
-        return DataTables::eloquent($model)
-            ->addColumn('title', function(Employee $employee) {
-                return $employee->title->name;
-            })
-            ->editColumn('salary', function(Employee $employee) {
-                return number_format($employee->salary, 2, ',', ' ');
-            })
-            ->make(true);
+        if (request()->ajax()) {
+            return DataTables::eloquent(Employee::query())
+                ->addColumn('title', function(Employee $employee) {
+                    return $employee->title->name;
+                })
+                ->editColumn('salary', function(Employee $employee) {
+                    return number_format($employee->salary, 2, ',', ' ');
+                })
+                ->editColumn('hire_date', function(Employee $employee) {
+                    return Carbon::parse($employee->hire_date)->format('d M Y');
+                })
+                ->make(true);
+        }
+        return new JsonResponse([
+            'code' => 403,
+            'message' => 'direct view not allowed'
+        ]);
     }
 }
