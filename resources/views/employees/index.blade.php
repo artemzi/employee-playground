@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
-@section('content')
+@section('styles')
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+@endsection
 
-    <div class="employee-content">
-        <div class="employee_table">
-            <table class="table table-hover">
-                <thead>
+@section('content')
+    <table class="table table-bordered" id="employees-table">
+            <thead>
                 <tr>
                     <th>ID</th>
                     <th>Full Name</th>
@@ -13,26 +14,28 @@
                     <th>Hire Date</th>
                     <th>Salary (RUB)</th>
                 </tr>
-                </thead>
-                <tbody>
+            </thead>
+        </table>
 
-                @foreach ($employees as $employee)
-                    <tr>
-                        <td>{{ $employee->id }}</td>
-                        <td>{{ $employee->full_name }}</td>
-                        <td>{{ $employee->title->name }}</td>
-                        <td>{{ Carbon\Carbon::parse($employee->hire_date)->format('d M / Y') }}</td>
-                        <td>@salary($employee->salary)</td>
-                    </tr>
-                @endforeach
+@endsection
 
-                </tbody>
-            </table>
-        </div>
-
-        <div class="d-flex justify-content-center">
-            {{ $employees->links() }}
-        </div>
-    </div>
-
+@section('scripts')
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+    $(function() {
+        $('#employees-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{!! route('datatables.data') !!}',
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'full_name', name: 'full_name' },
+                { data: 'title_id', name: 'title_id' },
+                { data: 'hire_date', name: 'hire_date' },
+                { data: 'salary', name: 'salary' },
+            ]
+        });
+    });
+    </script>
 @endsection

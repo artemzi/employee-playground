@@ -15,12 +15,6 @@ class EmployeeController extends Controller
         return view('home', compact('boss', 'total'));
     }
 
-    public function table(Request $request)
-    {
-        $employees = Employee::paginate(15);
-        return view('employees.index', compact('employees'));
-    }
-
     public function tree(Request $request)
     {
         if ($request->ajax()) {

@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css', 'build') }}" rel="stylesheet">
+    @yield('styles')
 </head>
 <body id="app">
     <header>
@@ -55,5 +56,6 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js', 'build') }}"></script>
+    @yield('scripts')
 </body>
 </html>
