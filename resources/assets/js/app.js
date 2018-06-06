@@ -17,7 +17,7 @@ axios({
             // Append a link to the jqtree-element div.
             // The link has an url '#node-[id]' and a data property 'node-id'.
             $li.find('.jqtree-element').append(
-                ' - ( <span data-node-id="'+
+                ' - ( <span class="node_title" data-node-id="'+
                 node.id +'">' + node.title.name + '</span> )'
             );
         }
