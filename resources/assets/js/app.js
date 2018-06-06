@@ -1,23 +1,16 @@
 require('./bootstrap');
 
-let data = [
-    {
-        name: 'node1',
-        children: [
-            { name: 'child1' },
-            { name: 'child2' }
-        ]
-    },
-    {
-        name: 'node2',
-        children: [
-            { name: 'child3' }
-        ]
-    }
-];
-
-$(function() {
+axios({
+  method: 'post',
+  url: '/tree',
+}).then(function (response) {
+    console.log(response.data);
     $('#tree').tree({
-        data: data
+        data: response.data,
+        autoOpen: true,
+        dragAndDrop: false
     });
-});
+  })
+  .catch(function (error) {
+    console.log(error);
+  });

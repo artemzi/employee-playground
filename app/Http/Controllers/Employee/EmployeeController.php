@@ -10,8 +10,14 @@ class EmployeeController extends Controller
 {
     public function index(Request $request)
     {
-        $employees = Employee::defaultOrder()->withDepth()->get();
+        return view('home');
+    }
 
-        return view('home', compact('employees'));
+    public function tree(Request $request)
+    {
+        if ($request->ajax()) {
+            return Employee::defaultOrder()->get(['id', 'full_name as label', 'title_id', '_lft', '_rgt', 'parent_id'])->toTree();
+        }
+        return redirect('home');
     }
 }
