@@ -28,6 +28,14 @@ class DatatablesController extends Controller
      */
     public function data(): JsonResponse
     {
-        return DataTables::of(Employee::query())->make(true);
+        $model = Employee::query();
+        return DataTables::eloquent($model)
+            ->addColumn('title', function(Employee $employee) {
+                return $employee->title->name;
+            })
+            ->editColumn('salary', function(Employee $employee) {
+                return number_format($employee->salary, 2, ',', ' ');
+            })
+            ->make(true);
     }
 }

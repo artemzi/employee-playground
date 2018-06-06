@@ -27,11 +27,14 @@
         $('#employees-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{!! route('datatables.data') !!}',
+            ajax: {
+                url: '{!! route('datatables.data') !!}',
+                method: 'get',
+            },
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'full_name', name: 'full_name' },
-                { data: 'title_id', name: 'title_id' },
+                { data: 'title', name: 'title' },
                 { data: 'hire_date', name: 'hire_date' },
                 { data: 'salary', name: 'salary' },
             ]
