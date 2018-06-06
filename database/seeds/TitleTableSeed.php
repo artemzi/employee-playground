@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 class TitleTableSeed extends Seeder
 {
     public const TITLES = [
+        'Boss',
         'Level One',
         'Level Two',
         'Level Three',
