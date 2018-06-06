@@ -8,8 +8,8 @@ axios({
     let $tree = $('#tree');
     $tree.tree({
         data: response.data,
-        autoOpen: true,
-        selectable: false,
+        autoOpen: false,
+        selectable: true,
         closedIcon: '+',
         openedIcon: '-',
         dragAndDrop: false,
