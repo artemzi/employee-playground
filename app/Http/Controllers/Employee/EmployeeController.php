@@ -10,13 +10,15 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $boss = Employee::whereId(1)->first();
+        return view('home', compact('boss'));
     }
 
     public function tree(Request $request)
     {
         if ($request->ajax()) {
-            $employees = Employee::defaultOrder()->get(['id', 'full_name as label', 'title_id', '_lft', '_rgt', 'parent_id']);
+            // do not show root node. This is a Boss, not employee
+            $employees = Employee::withoutRoot()->get(['id', 'full_name as label', 'title_id', '_lft', '_rgt', 'parent_id']);
             foreach ($employees as $empl) {
                 $empl['title'] = $empl->title->name;
             }
