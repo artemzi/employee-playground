@@ -5,6 +5,7 @@
     @if(!empty($boss))
         <p>In current migrations Boss is <strong>{{ $boss->full_name }}</strong> - ( title: {{ $boss->title->name }} )</p>
     @endif
+    <p>Total employees in database: {{ $total }}</p>
     <hr>
     <div id="tree"></div>
 @endsection

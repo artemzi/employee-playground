@@ -10,8 +10,9 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $boss = Employee::whereId(1)->first();
-        return view('home', compact('boss'));
+        $boss = Employee::whereTitle_id(1)->first();
+        $total = Employee::count();
+        return view('home', compact('boss', 'total'));
     }
 
     public function tree(Request $request)
