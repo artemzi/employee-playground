@@ -15,6 +15,13 @@ class EmployeeController extends Controller
         return view('home', compact('boss', 'total'));
     }
 
+    public function show($id)
+    {
+        $employee = Employee::findOrFail($id);
+
+        return view('employees.show', compact('employee'))->render();
+    }
+
     public function tree(Request $request)
     {
         if ($request->ajax()) {

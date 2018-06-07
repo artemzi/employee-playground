@@ -66,8 +66,8 @@
             }
         });
         table.on('click', 'tr', function () {
-            let data = table.row(this).data();
-            console.log(data);
+            let row = table.row(this).data();
+            window.location.href = `employee/${row.id}`;
         });
     });
     </script>
