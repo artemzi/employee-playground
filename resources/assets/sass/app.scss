@@ -13,6 +13,20 @@
   padding: .35rem 1rem;
 }
 
+.navbar-brand,
+.navbar-text {
+    color: $navbar-brand-color;
+}
+
+.navbar-nav .nav-link {
+    color: $navbar-link-color;
+}
+
+.navbar-brand:hover,
+.navbar-nav .nav-link:hover {
+    color: $navbar-hover-color;
+}
+
 body {
   display: flex;
   min-height: 100vh;
@@ -23,17 +37,8 @@ body {
   flex: 1;
 }
 
-.employee-content {
-  display: flex;
-  min-height: 85vh;
-  flex-direction: column;
-}
-
-.employee_table {
-  flex: 1;
-  table {
-    cursor: pointer;
-  }
+table {
+  cursor: pointer;
 }
 
 .node_title {

@@ -5,17 +5,30 @@
 @endsection
 
 @section('content')
-    <table class="table table-bordered" id="employees-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Full Name</th>
-                    <th>Title</th>
-                    <th>Hire Date</th>
-                    <th>Salary (RUB)</th>
-                </tr>
-            </thead>
-        </table>
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover" id="employees-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Title</th>
+                        <th>Hire Date</th>
+                        <th>Salary (RUB)</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 
 @endsection
 
@@ -27,17 +40,28 @@
         $('#employees-table').DataTable({
             processing: true,
             serverSide: true,
+            dom: 'ltipr',
             ajax: {
                 url: '{!! route('datatables.data') !!}',
-                method: 'get',
             },
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'full_name', name: 'full_name' },
-                { data: 'title', name: 'title', title: 'Position' },
+                { data: 'title', name: 'titles.name', title: 'Position' },
                 { data: 'hire_date', name: 'hire_date' },
                 { data: 'salary', name: 'salary' },
-            ]
+            ],
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    let column = this;
+                    let input = document.createElement("input");
+                    input.className = 'form-control';
+                    $(input).appendTo($(column.footer()).empty())
+                    .on('input', function () {
+                        column.search($(this).val(), false, false, true).draw();
+                    });
+            });
+        }
         });
     });
     </script>

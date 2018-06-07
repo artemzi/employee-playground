@@ -1,14 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-    <h4>Boss (as position title) is not an employee, but parent for each node (root element). So Boss isn't shown in the tree, but each employee has a chief.</h4>
-    @if(!empty($boss))
-        <p>In current migrations Boss is <strong>{{ $boss->full_name }}</strong> - ( title: {{ $boss->title->name }} )</p>
-        <p><a href="{!! route('table') !!}">View in table</a></p>
-    @endif
-    <p>Total employees in database: {{ $total }}</p>
-    <hr>
-    <div class="d-flex justify-content-center" id="tree"></div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <h5>&nbspBoss (as position title) is not an employee, but parent for each node (root element). So Boss isn't shown in the tree, but each employee has a chief.</h5>
+            @if(!empty($boss))
+                <p>In current migrations Boss is <strong>{{ $boss->full_name }}</strong> - ( title: {{ $boss->title->name }} )</p>
+                <p><a href="{!! route('table') !!}">View in table</a></p>
+            @endif
+        </div>
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">Total employees in database: {{ $total }}</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    <div class="d-flex justify-content-center" id="tree"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -21,8 +39,8 @@
             let $tree = $('#tree');
             $tree.tree({
                 data: response.data,
-                autoOpen: true,
-                selectable: true,
+                autoOpen: false,
+                selectable: false,
                 closedIcon: '+',
                 openedIcon: '-',
                 dragAndDrop: false,
