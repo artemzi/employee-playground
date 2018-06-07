@@ -17,6 +17,15 @@
                         <th>Salary (RUB)</th>
                     </tr>
                 </thead>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -31,17 +40,28 @@
         $('#employees-table').DataTable({
             processing: true,
             serverSide: true,
+            dom: 'ltipr',
             ajax: {
                 url: '{!! route('datatables.data') !!}',
-                method: 'get',
             },
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'full_name', name: 'full_name' },
-                { data: 'title', name: 'title', title: 'Position' },
+                { data: 'title', name: 'titles.name', title: 'Position' },
                 { data: 'hire_date', name: 'hire_date' },
                 { data: 'salary', name: 'salary' },
-            ]
+            ],
+            initComplete: function () {
+                this.api().columns().every(function () {
+                    let column = this;
+                    let input = document.createElement("input");
+                    input.className = 'form-control';
+                    $(input).appendTo($(column.footer()).empty())
+                    .on('input', function () {
+                        column.search($(this).val(), false, false, true).draw();
+                    });
+            });
+        }
         });
     });
     </script>
