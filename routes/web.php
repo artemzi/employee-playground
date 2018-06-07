@@ -1,5 +1,8 @@
 <?php
 
+
+Auth::routes();
+
 Route::group([
     'namespace' => 'Employee',
 ], function() {
@@ -9,3 +12,4 @@ Route::group([
     Route::get('/employees', 'DatatablesController@index')->name('table');
     Route::get('/employees/data', 'DatatablesController@data')->name('datatables.data');
 });
+

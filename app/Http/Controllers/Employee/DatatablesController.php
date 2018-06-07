@@ -12,22 +12,16 @@ use Illuminate\View\View;
 
 class DatatablesController extends Controller
 {
-    /**
-     * Displays datatables front end view
-     *
-     * @return View
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(): View
     {
         return view('employees.index');
     }
 
-    /**
-     * Process datatables ajax request.
-     *
-     * @return JsonResponse
-     * @throws \Exception
-     */
     public function data(): JsonResponse
     {
         if (request()->ajax()) {
