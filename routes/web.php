@@ -10,6 +10,6 @@ Route::group([
     Route::post('/tree', 'EmployeeController@tree')->name('tree');
 
     Route::get('/employees', 'DatatablesController@index')->name('table');
-    Route::get('/employees/data', 'DatatablesController@data')->name('datatables.data');
+    Route::post('/employees/data', 'DatatablesController@data')->name('datatables.data');
 });
 

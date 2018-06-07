@@ -37,12 +37,14 @@
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
     <script>
     $(function() {
-        $('#employees-table').DataTable({
+        let table = $('#employees-table').DataTable({
             processing: true,
             serverSide: true,
             dom: 'ltipr',
             ajax: {
                 url: '{!! route('datatables.data') !!}',
+                type: 'POST',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
             },
             columns: [
                 { data: 'id', name: 'id' },
@@ -60,8 +62,12 @@
                     .on('input', function () {
                         column.search($(this).val(), false, false, true).draw();
                     });
-            });
-        }
+                });
+            }
+        });
+        table.on('click', 'tr', function () {
+            let data = table.row(this).data();
+            console.log(data);
         });
     });
     </script>
