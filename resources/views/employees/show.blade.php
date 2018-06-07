@@ -13,7 +13,7 @@
                     <h5>{{ $employee->full_name }}</h5>
                     <p>Position: {{ $employee->title->name }}</p>
                     <p>Hire Date: {{ \Carbon\Carbon::parse($employee->hire_date)->format('d M Y') }}</p>
-                    <p>Salary (RUB): {{ $employee->salary }}</p>
+                    <p>Salary: @salary($employee->salary) (RUB)</p>
                 </div>
             </div>
         </div>
