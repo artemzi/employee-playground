@@ -39,7 +39,7 @@
             let $tree = $('#tree');
             $tree.tree({
                 data: response.data,
-                autoOpen: false,
+                autoOpen: true,
                 selectable: false,
                 closedIcon: '+',
                 openedIcon: '-',
