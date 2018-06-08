@@ -20,6 +20,11 @@ class Employee extends Model
         'full_name', 'hire_date', 'parent_id', 'title_id', 'salary',
     ];
 
+    public function getParent()
+    {
+        return Employee::where('id',  $this->getParentId())->get()[0];
+    }
+
     public function title()
     {
         return $this->belongsTo(Title::class);

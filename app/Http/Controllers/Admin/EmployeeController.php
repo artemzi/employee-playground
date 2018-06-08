@@ -42,4 +42,32 @@ class EmployeeController extends Controller
 
         return redirect()->route('employee.show', $employee->id);
     }
+
+    public function edit(Employee $employee)
+    {
+        $parents = Employee::defaultOrder()->withDepth()->get();
+        $titles = Title::all();
+
+        return view('admin.employees.edit', compact('employee', 'parents', 'titles'));
+    }
+
+    public function update(CreateRequest $request, Employee $employee)
+    {
+        $employee->update([
+            'full_name' => $request['full_name'],
+            'title_id' => $request['title'],
+            'hire_date' => $request['hire_date'],
+            'salary' => (int) $request['salary'],
+            'parent_id' => $request['parent']
+        ]);
+
+        return redirect()->route('employee.show', $employee->id);
+    }
+
+    public function destroy(Employee $employee)
+    {
+        $employee->delete();
+
+        return redirect()->route('table');
+    }
 }

@@ -17,6 +17,9 @@ Route::group([
 ], function() {
     Route::resource('employee', 'EmployeeController')->names([
         'create' => 'employees.create',
+        'edit' => 'employees.edit',
+        'update' => 'employees.update',
+        'destroy' => 'employees.destroy',
     ]);
 
     Route::get('employees', 'DatatablesController@index')->name('table');
