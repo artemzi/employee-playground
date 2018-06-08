@@ -69,6 +69,7 @@
                 </div>
 
                 <div class="form-group">
+                    <a href="{{ URL::previous() }}" class="btn btn-danger">Cancel</a>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </form>

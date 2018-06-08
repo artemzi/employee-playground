@@ -21,7 +21,7 @@
                         </div>
                     @endif
 
-                    <div class="d-flex justify-content-center" id="tree"></div>
+                    <div class="d-flex justify-content-left" id="tree"></div>
                 </div>
             </div>
         </div>
