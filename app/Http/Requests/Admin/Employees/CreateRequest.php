@@ -16,7 +16,7 @@ class CreateRequest extends FormRequest
         return [
             'full_name' => 'required|string',
             'title_id' => 'integer|exists:titles,id',
-            'hire_date' => 'nullable|datetime',
+            'hire_date' => 'required|date_format:Y-m-d H:i:s',
             'salary' => 'nullable|string',
             'parent' => 'nullable|integer|exists:employees,id'
         ];

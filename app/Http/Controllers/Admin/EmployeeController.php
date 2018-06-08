@@ -3,6 +3,7 @@
 namespace EmployeeDirectory\Http\Controllers\Admin;
 
 use EmployeeDirectory\Entity\Employee;
+use EmployeeDirectory\Entity\Title;
 use EmployeeDirectory\Http\Controllers\Controller;
 use EmployeeDirectory\Http\Requests\Admin\Employees\CreateRequest;
 use Illuminate\Http\Request;
@@ -23,11 +24,22 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        return view('admin.employees.add');
+        $parents = Employee::defaultOrder()->withDepth()->get();
+        $titles = Title::all();
+
+        return view('admin.employees.add', compact('parents', 'titles'));
     }
 
     public function store(CreateRequest $request)
     {
-        dd($request);
+        $employee = Employee::create([
+            'full_name' => $request['full_name'],
+            'title_id' => $request['title'],
+            'hire_date' => $request['hire_date'],
+            'salary' => (int) $request['salary'],
+            'parent_id' => $request['parent']
+        ]);
+
+        return redirect()->route('employee.show', $employee->id);
     }
 }

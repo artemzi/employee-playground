@@ -17,7 +17,7 @@ class Employee extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'full_name', 'hire_date', 'parent_id',
+        'full_name', 'hire_date', 'parent_id', 'title_id', 'salary',
     ];
 
     public function title()
