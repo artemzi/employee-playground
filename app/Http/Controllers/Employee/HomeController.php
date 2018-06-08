@@ -3,23 +3,16 @@
 namespace EmployeeDirectory\Http\Controllers\Employee;
 
 use EmployeeDirectory\Entity\Employee;
-use EmployeeDirectory\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use EmployeeDirectory\Http\Controllers\Controller;
 
-class EmployeeController extends Controller
+class HomeController extends Controller
 {
     public function index()
     {
         $boss = Employee::whereTitle_id(1)->first();
         $total = Employee::count();
         return view('home', compact('boss', 'total'));
-    }
-
-    public function show($id)
-    {
-        $employee = Employee::findOrFail($id);
-
-        return view('admin.employees.show', compact('employee'));
     }
 
     public function tree(Request $request)

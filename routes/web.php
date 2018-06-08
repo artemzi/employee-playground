@@ -6,17 +6,19 @@ Auth::routes();
 Route::group([
     'namespace' => 'Employee',
 ], function() {
-    Route::get('/', 'EmployeeController@index')->name('home');
-    Route::resource('employee', 'EmployeeController')->except([
-        'index'
-    ]);
+    Route::get('/', 'HomeController@index')->name('home');
 
-    Route::post('tree', 'EmployeeController@tree')->name('tree');
+    Route::post('tree', 'HomeController@tree')->name('tree');
 });
 
 Route::group([
+    'prefix' => 'admin',
     'namespace' => 'Admin',
 ], function() {
+    Route::resource('employee', 'EmployeeController')->names([
+        'create' => 'employees.create',
+    ]);
+
     Route::get('employees', 'DatatablesController@index')->name('table');
     Route::post('employees/data', 'DatatablesController@data')->name('datatables.data');
 });

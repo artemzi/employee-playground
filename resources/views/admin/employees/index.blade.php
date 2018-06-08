@@ -6,6 +6,11 @@
 
 @section('content')
     <div class="row">
+        <div class="col text-right">
+            <p><a href="{{ route('employees.create') }}" class="btn btn-success">Add Employee</a></p>
+        </div>
+    </div>
+    <div class="row">
         <div class="col">
             <table class="table table-hover" id="employees-table">
                 <thead>
