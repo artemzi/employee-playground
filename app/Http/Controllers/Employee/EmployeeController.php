@@ -19,7 +19,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
 
-        return view('employees.show', compact('employee'))->render();
+        return view('admin.employees.show', compact('employee'));
     }
 
     public function tree(Request $request)

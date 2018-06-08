@@ -1,6 +1,6 @@
 <?php
 
-namespace EmployeeDirectory\Http\Controllers\Employee;
+namespace EmployeeDirectory\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use DataTables;
@@ -19,7 +19,7 @@ class DatatablesController extends Controller
 
     public function index(): View
     {
-        return view('employees.index');
+        return view('admin.employees.index');
     }
 
     public function data(): JsonResponse
