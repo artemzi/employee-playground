@@ -3,10 +3,10 @@
 namespace EmployeeDirectory\Http\Controllers\Employee;
 
 use EmployeeDirectory\Entity\Employee;
-use EmployeeDirectory\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use EmployeeDirectory\Http\Controllers\Controller;
 
-class EmployeeController extends Controller
+class HomeController extends Controller
 {
     public function index()
     {

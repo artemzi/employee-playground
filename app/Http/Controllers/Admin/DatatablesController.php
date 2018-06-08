@@ -1,6 +1,6 @@
 <?php
 
-namespace EmployeeDirectory\Http\Controllers\Employee;
+namespace EmployeeDirectory\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use DataTables;
@@ -19,7 +19,7 @@ class DatatablesController extends Controller
 
     public function index(): View
     {
-        return view('employees.index');
+        return view('admin.employees.index');
     }
 
     public function data(): JsonResponse
@@ -39,7 +39,7 @@ class DatatablesController extends Controller
                     return number_format($employee->salary, 2, ',', ' ');
                 })
                 ->editColumn('hire_date', function(Employee $employee) {
-                    return Carbon::parse($employee->hire_date)->format('d M Y');
+                    return Carbon::parse($employee->hire_date)->format('d.m.Y');
                 })
                 ->make(true);
         }
