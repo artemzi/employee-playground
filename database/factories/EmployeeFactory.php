@@ -10,6 +10,7 @@ $factory->define(Employee::class, function (Faker $faker) {
 
     return [
         'full_name' => $faker->unique()->name,
+        'image' => 'default.png',
         'title_id' =>  null,
         'parent_id' => null,
         'hire_date' => Carbon::now(),
