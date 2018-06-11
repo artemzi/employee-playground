@@ -11,4 +11,10 @@ $(function() {
     $('#delete__action').mouseleave(function() {
         $( "#message__warning" ).remove();
     });
+
+    // image upload
+    $('.custom-file-input').on('change', function() {
+        let fileName = $(this).val().split('\\').pop();
+        $('.form-control-file').html(fileName);
+    });
 });

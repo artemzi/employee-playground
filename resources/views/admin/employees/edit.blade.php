@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-6 float-left">
+        <div class="col-md-6 float-left">
             <div class="card mt-5">
                 <div class="card-header"><h3>Edit:</h3></div>
 
@@ -80,8 +80,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
-
+        <div class="col-md-6">
+            @include('admin.employees._image')
         </div>
     </div>
 @endsection
