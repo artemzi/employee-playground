@@ -24,5 +24,7 @@ Route::group([
 
     Route::get('employees', 'DatatablesController@index')->name('table');
     Route::post('employees/data', 'DatatablesController@data')->name('datatables.data');
+
+    Route::resource('titles', 'TitleController');
 });
 
