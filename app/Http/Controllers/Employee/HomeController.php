@@ -17,16 +17,22 @@ class HomeController extends Controller
 
     public function tree(Request $request)
     {
-        if ($request->ajax()) {
+        if ($request->ajax() && $request->isMethod('POST')) {
             // do not show root node. This is a Boss, not employee
             $employees = Employee::withoutRoot()->get(
                 ['id', 'full_name as label', 'title_id', '_lft', '_rgt', 'parent_id']
             );
-            foreach ($employees as $empl) {
-                $empl['title'] = $empl->title->name;
-            }
-            return $employees->toTree();
+        } else {
+            $employees = Employee::where('parent_id', '=', $request['node'])->get(
+                ['id', 'full_name as label', 'title_id', '_lft', '_rgt', 'parent_id']
+            );
         }
-        return redirect('home');
+
+        foreach ($employees as $empl) {
+            $empl['title'] = $empl->title->name;
+            $empl['load_on_demand'] = true;
+        }
+
+        return $employees->toTree();
     }
 }
