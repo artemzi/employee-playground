@@ -8,6 +8,10 @@ class Title extends Model
 {
     public $timestamps = false;
 
+    protected $fillable = [
+        'name',
+    ];
+
     public function employees()
     {
         return $this->belongsToMany(Employee::class);

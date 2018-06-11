@@ -5,7 +5,7 @@ namespace EmployeeDirectory\Http\Controllers\Admin;
 use EmployeeDirectory\Entity\Employee;
 use EmployeeDirectory\Entity\Title;
 use EmployeeDirectory\Http\Controllers\Controller;
-use EmployeeDirectory\Http\Requests\Admin\Employees\CreateRequest;
+use EmployeeDirectory\Http\Requests\Admin\Employees\EmployeeRequest;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -30,7 +30,7 @@ class EmployeeController extends Controller
         return view('admin.employees.add', compact('parents', 'titles'));
     }
 
-    public function store(CreateRequest $request)
+    public function store(EmployeeRequest $request)
     {
         $employee = Employee::create([
             'full_name' => $request['full_name'],
@@ -51,7 +51,7 @@ class EmployeeController extends Controller
         return view('admin.employees.edit', compact('employee', 'parents', 'titles'));
     }
 
-    public function update(CreateRequest $request, Employee $employee)
+    public function update(EmployeeRequest $request, Employee $employee)
     {
         $employee->update([
             'full_name' => $request['full_name'],

@@ -22,15 +22,18 @@
                         </div>
                      </div>
                      <div class="col-4">
-                        <label for="title" class="col-form-label">Title</label>
-                        <select id="title" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title">
-                            <option value=""></option>
-                            @foreach ($titles as $title)
-                                <option value="{{ $title->id }}"{{ $title->id == old('title', $employee->title->id) ? ' selected' : '' }}>
-                                    {{ $title->name }}
-                                </option>
-                            @endforeach;
-                        </select>
+                        <div class="title__select">
+                            <label for="title" class="col-form-label">Title</label>
+                            <select id="title" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title">
+                                <option value=""></option>
+                                @foreach ($titles as $title)
+                                    <option value="{{ $title->id }}"{{ $title->id == old('title', $employee->title->id) ? ' selected' : '' }}>
+                                        {{ $title->name }}
+                                    </option>
+                                @endforeach;
+                            </select>
+                        <a href="{{ route('titles.index') }}" id="title__add_new">Add new title</a>
+                        </div>
                         @if ($errors->has('title'))
                             <span class="invalid-feedback"><strong>{{ $errors->first('title') }}</strong></span>
                         @endif
