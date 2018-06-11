@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-6 float-left">
+        <div class="col-md-6 float-left">
             <div class="card mt-5">
                 <div class="card-header"><h3>Edit:</h3></div>
 
@@ -73,15 +73,15 @@
                 </div>
 
                 <div class="form-group text-right">
-                     <a href="{{ URL::previous() }}" class="btn btn-danger">Cancel</a>
+                     <a href="{{ route('employee.show', $employee) }}" class="btn btn-danger">Cancel</a>
                     <button type="submit" class="btn btn-success">Save</button>
                 </div>
             </form>
                 </div>
             </div>
         </div>
-        <div class="col-6">
-
+        <div class="col-md-6">
+            @include('admin.employees._image')
         </div>
     </div>
 @endsection

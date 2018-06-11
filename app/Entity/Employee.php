@@ -17,7 +17,7 @@ class Employee extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'full_name', 'hire_date', 'parent_id', 'title_id', 'salary',
+        'full_name', 'image', 'hire_date', 'parent_id', 'title_id', 'salary',
     ];
 
     public function getParent()
@@ -28,5 +28,10 @@ class Employee extends Model
     public function title()
     {
         return $this->belongsTo(Title::class);
+    }
+
+    public function setImageAttribute($val)
+    {
+        $this->attributes['image'] = $val;
     }
 }

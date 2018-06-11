@@ -19,11 +19,12 @@ Route::group([
         'create' => 'employees.create',
         'edit' => 'employees.edit',
         'update' => 'employees.update',
-        'destroy' => 'employees.destroy',
+        'destroy' => 'employees.destroy'
     ]);
 
     Route::get('employees', 'DatatablesController@index')->name('table');
     Route::post('employees/data', 'DatatablesController@data')->name('datatables.data');
+    Route::post('employees/image/{employee}', 'EmployeeController@updateImage')->name('image');
 
     Route::resource('titles', 'TitleController');
 });

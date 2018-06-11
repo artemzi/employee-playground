@@ -7,6 +7,9 @@ use EmployeeDirectory\Entity\Title;
 use EmployeeDirectory\Http\Controllers\Controller;
 use EmployeeDirectory\Http\Requests\Admin\Employees\EmployeeRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class EmployeeController extends Controller
 {
@@ -69,5 +72,29 @@ class EmployeeController extends Controller
         $employee->delete();
 
         return redirect()->route('table');
+    }
+
+    public function updateImage(Request $request, Employee $employee)
+    {
+        $file = $request->file('image');
+        if(0 === strpos($file->getMimeType(), 'image')) {
+            $path = $file->hashName(public_path() . '/uploads/');
+            $path_thumb = $file->hashName(public_path() . '/uploads/thumbnails/');
+
+            $img = Image::make($file);
+            $img->save( $path);
+
+            $img_thumb = $img->fit(56, 56);
+            $img_thumb->save($path_thumb);
+
+            $employee->image = $file->hashName();
+            $employee->save();
+
+            Session::flash('message', 'Image updated');
+        } else {
+            Session::flash('message', 'Image is not updated, wrong filetype');
+        }
+
+        return redirect()->back();
     }
 }

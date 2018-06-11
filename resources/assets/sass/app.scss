@@ -50,3 +50,11 @@ table {
 #message__warning {
   margin-top: 1.5rem;
 }
+
+.custom-file {
+  margin-bottom: 1rem;
+}
+
+.custom-file-input ~ .custom-file-label::after {
+    content: "Select image";
+}
