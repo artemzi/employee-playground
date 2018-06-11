@@ -12,11 +12,12 @@
     </div>
     <div class="row">
         <div class="col">
-            <table class="table table-hover" id="employees-table">
+            <table class="table table-hover justify-content-center" id="employees-table">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Full Name</th>
+                        <th id="avatar">Avatar</th>
                         <th>Title</th>
                         <th>Hire Date</th>
                         <th>Salary (RUB)</th>
@@ -24,6 +25,7 @@
                 </thead>
                 <tfoot>
                     <tr>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -54,12 +56,18 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'full_name', name: 'full_name' },
+                { data : 'image',
+                    render : function(data, type, row) {
+                        if (data === '') return '';
+                        return "<image class=\"rounded mx-auto d-block\" src=' " + data + "' />";
+                    }, name: 'employees.id'
+                },
                 { data: 'title', name: 'titles.name', title: 'Position' },
                 { data: 'hire_date', name: 'hire_date' },
                 { data: 'salary', name: 'salary' },
             ],
             initComplete: function () {
-                this.api().columns().every(function () {
+                this.api().columns([0,1,3,4,5]).every(function () {
                     let column = this;
                     let input = document.createElement("input");
                     input.className = 'form-control';
@@ -72,7 +80,9 @@
         });
         table.on('click', 'tr', function () {
             let row = table.row(this).data();
-            window.location.href = `employee/${row.id}`;
+            if (row !== undefined) {
+                window.location.href = `employee/${row.id}`;
+            }
         });
     });
     </script>

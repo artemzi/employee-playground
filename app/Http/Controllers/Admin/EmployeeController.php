@@ -79,9 +79,13 @@ class EmployeeController extends Controller
         $file = $request->file('image');
         if(0 === strpos($file->getMimeType(), 'image')) {
             $path = $file->hashName(public_path() . '/uploads/');
+            $path_thumb = $file->hashName(public_path() . '/uploads/thumbnails/');
 
             $img = Image::make($file);
             $img->save( $path);
+
+            $img_thumb = $img->fit(56, 56);
+            $img_thumb->save($path_thumb);
 
             $employee->image = $file->hashName();
             $employee->save();

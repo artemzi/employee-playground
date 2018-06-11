@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="form-group text-right">
-                     <a href="{{ URL::previous() }}" class="btn btn-danger">Cancel</a>
+                     <a href="{{ route('employee.show', $employee) }}" class="btn btn-danger">Cancel</a>
                     <button type="submit" class="btn btn-success">Save</button>
                 </div>
             </form>

@@ -29,12 +29,17 @@ class DatatablesController extends Controller
                 'titles', 'employees.title_id', '=', 'titles.id'
             )->select(
             'employees.id',
+            'employees.image',
             'employees.full_name',
             'employees.hire_date',
             'employees.salary',
             'titles.name as title');
 
             return DataTables::eloquent($employees)
+                ->editColumn('image', function(Employee $employee) {
+                    if (!$employee->image) return '';
+                    return asset('uploads/thumbnails/' . $employee->image);
+                })
                 ->editColumn('salary', function(Employee $employee) {
                     return number_format($employee->salary, 2, ',', ' ');
                 })
