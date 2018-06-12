@@ -30,6 +30,9 @@ class HomeController extends Controller
 
         foreach ($employees as $empl) {
             $empl['title'] = $empl->title->name;
+            // do not use lazy load for first two levels
+            // TODO: check logic
+            if (\count($empl->descendants) === 0 || \count($empl->ancestors) < 3) continue;
             $empl['load_on_demand'] = true;
         }
 

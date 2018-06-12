@@ -51,10 +51,11 @@ table {
   margin-top: 1.5rem;
 }
 
-.custom-file {
-  margin-bottom: 1rem;
-}
+// jqtree loader
 
-.custom-file-input ~ .custom-file-label::after {
-    content: "Select image";
-}
+.jqtree-tree .jqtree-loading > div .jqtree-title:after {
+  content: url(spinner.gif);
+  margin-left: 8px; }
+
+#tree1.jqtree-loading:after {
+  content: url(spinner.gif); }
