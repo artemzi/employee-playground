@@ -21,6 +21,13 @@
                         </div>
                     @endif
 
+                     <div class="loading">
+                        <div class="spinner">
+                            <div class="mask">
+                                <div class="maskedCircle"></div>
+                            </div>
+                        </div>
+                    </div>
                     <div
                             class="d-flex justify-content-left"
                             id="tree"
@@ -34,15 +41,18 @@
 
 @section('scripts')
     <script type="text/javascript">
+        let $tree = $('#tree');
         axios({
           method: 'post',
           url: '/tree',
         }).then(function (response) {
-            let $tree = $('#tree');
             $tree.tree({
                 data: response.data,
                 selectable: false,
                 dragAndDrop: true,
+                autoOpen: false,
+                useContextMenu: false,
+
                 onCreateLi: function(node, $li) {
                     $li.find('.jqtree-element').append(
                         ' - ( <span class="node_title" data-node-id="'+
@@ -50,9 +60,37 @@
                     );
                 }
             });
-          })
-          .catch(function (error) {
+          }).catch(function (error) {
             console.log(error);
           });
+
+        $spinner = $(".loading");
+	    $spinner.toggle();
+        // move category
+        $tree.bind("tree.move", function (e) {
+            $spinner.toggle();
+            e.preventDefault();
+            axios({
+                method: "POST",
+                url: '/tree/move',
+                data: {
+                    "action": "moveCategory",
+                    "id": e.move_info.moved_node.id,
+                    "parent_id": e.move_info.moved_node.parent_id,
+                    "to": e.move_info.target_node.id,
+                    "name": e.move_info.moved_node.name,
+                    "direction": e.move_info.position
+                }
+            }).then(function (reponse) {
+                $spinner.toggle();
+                e.move_info.do_move();
+                e.move_info.moved_node["parent_id"] = (e.move_info.position == "inside")
+                    ? e.move_info.target_node["id"]
+                    : e.move_info.target_node["parent_id"];
+            }).catch(function (error) {
+                $spinner.toggle();
+                console.error(error.message);
+            });
+        }); // END move
     </script>
 @endsection
