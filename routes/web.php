@@ -10,6 +10,7 @@ Route::group([
 
     Route::post('tree', 'HomeController@tree')->name('tree');
     Route::get('tree', 'HomeController@tree')->name('tree');
+    Route::post('tree/move', 'HomeController@move');
 });
 
 Route::group([
