@@ -21,7 +21,10 @@
                         </div>
                     @endif
 
-                    <div class="d-flex justify-content-left" id="tree"></div>
+                    <div
+                            class="d-flex justify-content-left"
+                            id="tree"
+                            data-url="{{ route('tree') }}"></div>
                 </div>
             </div>
         </div>
@@ -35,15 +38,11 @@
           method: 'post',
           url: '/tree',
         }).then(function (response) {
-            // console.log(response.data);
             let $tree = $('#tree');
             $tree.tree({
                 data: response.data,
-                autoOpen: true,
                 selectable: false,
-                closedIcon: '+',
-                openedIcon: '-',
-                dragAndDrop: false,
+                dragAndDrop: true,
                 onCreateLi: function(node, $li) {
                     $li.find('.jqtree-element').append(
                         ' - ( <span class="node_title" data-node-id="'+

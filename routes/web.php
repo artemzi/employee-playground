@@ -9,6 +9,7 @@ Route::group([
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::post('tree', 'HomeController@tree')->name('tree');
+    Route::get('tree', 'HomeController@tree')->name('tree');
 });
 
 Route::group([
