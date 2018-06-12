@@ -17,27 +17,27 @@ class EmployeeTableSeed extends Seeder
                 'title_id' => 1,
             ]
         )->each(function(Employee $employee) {
-            $employee->children()->saveMany(factory(Employee::class, 2)->create(
+            $employee->children()->saveMany(factory(Employee::class, 5)->create(
                 [
                     'title_id' => 2,
                 ]
             )->each(function(Employee $employee) {
-                $employee->children()->saveMany(factory(Employee::class, 3)->create(
+                $employee->children()->saveMany(factory(Employee::class, 10)->create(
                     [
                         'title_id' => 3,
                     ]
                 )->each(function(Employee $employee) {
-                    $employee->children()->saveMany(factory(Employee::class, 3)->create(
+                    $employee->children()->saveMany(factory(Employee::class, 10)->create(
                         [
                             'title_id' => 4,
                         ]
                     )->each(function(Employee $employee) {
-                        $employee->children()->saveMany(factory(Employee::class, 3)->create(
+                        $employee->children()->saveMany(factory(Employee::class, 10)->create(
                             [
                                 'title_id' => 5,
                             ]
                         )->each(function(Employee $employee) {
-                            $employee->children()->saveMany(factory(Employee::class, 5)->create(
+                            $employee->children()->saveMany(factory(Employee::class, 10)->create(
                                 [
                                     'title_id' => 6,
                                 ]
