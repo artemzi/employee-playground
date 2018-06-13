@@ -18,7 +18,8 @@ class EmployeeRequest extends FormRequest
             'title_id' => 'integer|exists:titles,id',
             'hire_date' => 'required|date_format:Y-m-d H:i:s',
             'salary' => 'nullable|string',
-            'parent' => 'nullable|integer|exists:employees,id'
+            'parent' => 'nullable|integer|exists:employees,id',
+            'new__parent' => 'nullable|integer|exists:employees,id'
         ];
     }
 }

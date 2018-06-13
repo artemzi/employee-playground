@@ -68,6 +68,16 @@
                     @endif
                 </div>
 
+                <div class="form-check" {{ $employee->parent_id === null ? ' hidden' : '' }}>
+                        <input type="checkbox" class="form-check-input" id="descendants">
+                        <label class="form-check-label" for="descendants">Reassign descendants</label>
+                </div>
+
+                <div class="form-group" id="nparent" style="display: none; width: 100%;">
+                    <label for="new__parent" class="col-form-label">Choose new parent for descendants</label>
+                    <select style="width: 100%;" id="new__parent" class="new__parent form-control{{ $errors->has('new__parent') ? ' is-invalid' : '' }}" name="new__parent"></select>
+                </div>
+
                 <div class="form-group text-right">
                      <a href="{{ route('employee.show', $employee) }}" class="btn btn-danger">Cancel</a>
                     <button type="submit" class="btn btn-success">Save</button>
