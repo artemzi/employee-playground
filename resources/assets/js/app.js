@@ -18,4 +18,24 @@ $(function() {
         let fileName = $(this).val().split('\\').pop();
         $('.form-control-file').html(fileName);
     });
+
+    // input search parent action
+    $('.parent').select2({
+        ajax: {
+            minimumInputLength: 2,
+            placeholder: "Choose parent...",
+            url: '/admin/employees/search',
+            dataType: 'json',
+            data: function (params) {
+                return {
+                    q: $.trim(params.term)
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            }
+        }
+    });
 });

@@ -28,6 +28,8 @@ Route::group([
     Route::post('employees/data', 'DatatablesController@data')->name('datatables.data');
     Route::post('employees/image/{employee}', 'EmployeeController@updateImage')->name('image');
 
+    Route::get('employees/{full_name}', 'EmployeeController@search')->name('search');
+
     Route::resource('titles', 'TitleController');
 });
 

@@ -57,15 +57,7 @@
 
                 <div class="form-group">
                     <label for="parent" class="col-form-label">Parent</label>
-                    <select id="parent" class="form-control{{ $errors->has('parent') ? ' is-invalid' : '' }}" name="parent">
-                        <option value=""></option>
-                        @foreach ($parents as $parent)
-                            <option value="{{ $parent->id }}"{{ $parent->id == old('parent') ? ' selected' : '' }}>
-                                @for ($i = 0; $i < $parent->depth; $i++) &mdash; @endfor
-                                {{ $parent->full_name }}
-                            </option>
-                        @endforeach;
-                    </select>
+                    <select id="parent" class="parent form-control" name="parent"></select>
                     @if ($errors->has('parent'))
                         <span class="invalid-feedback"><strong>{{ $errors->first('parent') }}</strong></span>
                     @endif

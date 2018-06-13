@@ -30,19 +30,16 @@ class EmployeeTableSeed extends Seeder
                     $employee->children()->saveMany(factory(Employee::class, 10)->create(
                         [
                             'title_id' => 4,
-                            'load_on_demand' => true,
                         ]
                     )->each(function(Employee $employee) {
                         $employee->children()->saveMany(factory(Employee::class, 10)->create(
                             [
                                 'title_id' => 5,
-                                'load_on_demand' => true,
                             ]
                         )->each(function(Employee $employee) {
                             $employee->children()->saveMany(factory(Employee::class, 10)->create(
                                 [
                                     'title_id' => 6,
-                                    'load_on_demand' => true,
                                 ]
                             ));
                         }));

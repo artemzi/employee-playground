@@ -27,10 +27,9 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        $parents = Employee::defaultOrder()->withDepth()->get();
         $titles = Title::all();
 
-        return view('admin.employees.add', compact('parents', 'titles'));
+        return view('admin.employees.add', compact('titles'));
     }
 
     public function store(EmployeeRequest $request)
@@ -48,10 +47,10 @@ class EmployeeController extends Controller
 
     public function edit(Employee $employee)
     {
-        $parents = Employee::defaultOrder()->withDepth()->get();
+        $parent = Employee::whereKey($employee['parent_id'])->first();
         $titles = Title::all();
 
-        return view('admin.employees.edit', compact('employee', 'parents', 'titles'));
+        return view('admin.employees.edit', compact('employee', 'parent', 'titles'));
     }
 
     public function update(EmployeeRequest $request, Employee $employee)
@@ -72,6 +71,17 @@ class EmployeeController extends Controller
         $employee->delete();
 
         return redirect()->route('table');
+    }
+
+    public function search(Request $request)
+    {
+        $employees = Employee::where('full_name', 'like', "%{$request->q}%")->paginate(10);
+
+        $data = [];
+        foreach ($employees as $employee) {
+            $data[] = ['id' => $employee->id, 'text' => $employee->full_name];
+        }
+        return response()->json($data);
     }
 
     public function updateImage(Request $request, Employee $employee)

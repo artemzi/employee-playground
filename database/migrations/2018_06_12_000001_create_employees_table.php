@@ -28,7 +28,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('title_id')->nullable()->references('id')->on('title')->onDelete('CASCADE');
             $table->timestamp('hire_date')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->integer('salary');
-            $table->boolean('load_on_demand')->default(false);
+            $table->boolean('load_on_demand')->default(true);
             $table->unsignedInteger('_lft')->default('0');
             $table->unsignedInteger('_rgt')->default('0');
             $table->unsignedInteger('parent_id')->nullable()->default(null);
