@@ -43,6 +43,9 @@ if (token) {
  * */
 window.jqtree = require('jqtree');
 
+// select2
+window.jqtree = require('select2');
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

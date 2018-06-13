@@ -17,11 +17,21 @@ class Employee extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'full_name', 'hire_date', 'parent_id',
+        'full_name', 'image', 'hire_date', 'parent_id', 'title_id', 'salary',
     ];
+
+    public function getParent()
+    {
+        return Employee::where('id',  $this->getParentId())->get()[0];
+    }
 
     public function title()
     {
         return $this->belongsTo(Title::class);
+    }
+
+    public function setImageAttribute($val)
+    {
+        $this->attributes['image'] = $val;
     }
 }
