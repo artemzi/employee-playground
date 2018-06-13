@@ -7,6 +7,7 @@ use EmployeeDirectory\Entity\Title;
 use EmployeeDirectory\Http\Controllers\Controller;
 use EmployeeDirectory\Http\Requests\Admin\Employees\EmployeeRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -55,6 +56,20 @@ class EmployeeController extends Controller
 
     public function update(EmployeeRequest $request, Employee $employee)
     {
+        if (isset($request['new__parent'])) {
+            DB::beginTransaction();
+            try {
+                foreach ($employee->children()->get() as $child) {
+                    $child->parent_id = $request['new__parent'];
+                    $child->save();
+                }
+            } catch (\Exception $e) {
+                DB::rollback();
+            }
+
+    	    DB::commit();
+        }
+
         $employee->update([
             'full_name' => $request['full_name'],
             'title_id' => $request['title'],

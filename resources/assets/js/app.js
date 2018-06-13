@@ -38,4 +38,36 @@ $(function() {
             }
         }
     });
+
+    // choose new parent checkbox
+    let chShipBlock = $('#nparent');
+    $('#descendants').on('click', function() {
+        if($(this).is(':checked')) {
+          chShipBlock.show();
+          chShipBlock.find('input').attr('required', true);
+        } else {
+          chShipBlock.hide();
+          chShipBlock.find('input').attr('required', false);
+        }
+    });
+
+    // input search new parent action
+    $('#new__parent').select2({
+        ajax: {
+            minimumInputLength: 2,
+            placeholder: "Choose parent...",
+            url: '/admin/employees/search',
+            dataType: 'json',
+            data: function (params) {
+                return {
+                    q: $.trim(params.term)
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data
+                };
+            }
+        }
+    });
 });
