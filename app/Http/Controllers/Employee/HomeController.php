@@ -11,28 +11,14 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $boss = Employee::whereKey(1)->first();
         $total = Employee::count();
-        return view('home', compact('boss', 'total'));
+        return view('home', compact('total'));
     }
 
     public function tree(Request $request)
     {
-        if ($request->ajax() && $request->isMethod('POST')) {
-            // do not show root node. This is a Boss, not employee
-            $employees = Employee::withoutRoot()
-                ->join('titles', 'employees.title_id', '=', 'titles.id')
-                ->select(
-                'employees.id',
-                'full_name as label',
-                'titles.name as title',
-                'load_on_demand',
-                '_lft',
-                '_rgt',
-                'parent_id'
-            )->get();
-        } else {
-            $employees = Employee::where('parent_id', '=', $request['node'])
+        if ($request->ajax()) {
+            $employees = Employee::defaultOrder()->where('parent_id', '=', $request['node'])
                 ->join('titles', 'employees.title_id', '=', 'titles.id')
                 ->select(
                 'employees.id',

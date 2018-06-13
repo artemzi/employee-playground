@@ -7,3 +7,6 @@ docker-down:
 
 test:
 	./vendor/bin/phpunit
+
+log-clear:
+	cat /dev/null > storage/logs/laravel.log

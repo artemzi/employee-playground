@@ -4,11 +4,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <h5>&nbspBoss (as position title) is not an employee, but parent for each node (root element). So Boss isn't shown in the tree, but each employee has a chief.</h5>
-            @if(!empty($boss))
-                <p>In current migrations Boss is <strong>{{ $boss->full_name }}</strong> - ( title: {{ $boss->title->name }} )</p>
-                <p><a href="{!! route('table') !!}">View in table</a></p>
-            @endif
+            <p><a href="{!! route('table') !!}">Detailed view</a></p>
         </div>
         <div class="col-md-10">
             <div class="card">
@@ -42,15 +38,21 @@
 @section('scripts')
     <script type="text/javascript">
         let $tree = $('#tree');
+        let $spinner = $(".loading");
+
         axios({
-          method: 'post',
-          url: '/tree',
+            method: 'get',
+            url: '/tree',
+            data: {
+                "node": 1,
+            }
         }).then(function (response) {
             $tree.tree({
                 data: response.data,
                 selectable: false,
                 dragAndDrop: true,
-                autoOpen: false,
+                autoOpen: 0, // auto open first level
+                saveState: false,
                 useContextMenu: false,
 
                 onCreateLi: function(node, $li) {
@@ -64,7 +66,6 @@
             console.log(error);
           });
 
-        $spinner = $(".loading");
 	    $spinner.toggle();
         // move category
         $tree.bind("tree.move", function (e) {
