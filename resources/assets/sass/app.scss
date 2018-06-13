@@ -53,6 +53,28 @@ table {
   margin-top: 1.5rem;
 }
 
+/* tree  */
+ul.jqtree-tree .jqtree-element {
+  position: relative;
+
+  /* Store - new css */
+  padding: 7px;
+  border-radius: 4px;
+}
+
+ul.jqtree-tree li {
+  /* Store - new css */
+  border: 1px solid #143546;
+  margin: 7px 7px 7px 0;
+  border-radius: 4px;
+}
+ul.jqtree-tree span.jqtree-border {
+  /* Store - new css */
+  padding: 7px;
+  border-radius: 4px;
+}
+/* tree ends */
+
 // jqtree loader
 
 .jqtree-tree .jqtree-loading > div .jqtree-title:after {
