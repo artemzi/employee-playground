@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $boss = Employee::whereTitle_id(1)->first();
+        $boss = Employee::whereKey(1)->first();
         $total = Employee::count();
         return view('home', compact('boss', 'total'));
     }
@@ -20,21 +20,29 @@ class HomeController extends Controller
     {
         if ($request->ajax() && $request->isMethod('POST')) {
             // do not show root node. This is a Boss, not employee
-            $employees = Employee::withoutRoot()->get(
-                ['id', 'full_name as label', 'title_id', '_lft', '_rgt', 'parent_id']
-            );
+            $employees = Employee::withoutRoot()
+                ->join('titles', 'employees.title_id', '=', 'titles.id')
+                ->select(
+                'employees.id',
+                'full_name as label',
+                'titles.name as title',
+                'load_on_demand',
+                '_lft',
+                '_rgt',
+                'parent_id'
+            )->get();
         } else {
-            $employees = Employee::where('parent_id', '=', $request['node'])->get(
-                ['id', 'full_name as label', 'title_id', '_lft', '_rgt', 'parent_id']
-            );
-        }
-
-        foreach ($employees as $empl) {
-            $empl['title'] = $empl->title->name;
-            // do not use lazy load for first two levels
-            // TODO: check logic
-            if (\count($empl->descendants) === 0 || \count($empl->ancestors) < 3) continue;
-            $empl['load_on_demand'] = true;
+            $employees = Employee::where('parent_id', '=', $request['node'])
+                ->join('titles', 'employees.title_id', '=', 'titles.id')
+                ->select(
+                'employees.id',
+                'full_name as label',
+                'titles.name as title',
+                'load_on_demand',
+                '_lft',
+                '_rgt',
+                'parent_id'
+            )->get();
         }
 
         return $employees->toTree();

@@ -56,7 +56,7 @@
                 onCreateLi: function(node, $li) {
                     $li.find('.jqtree-element').append(
                         ' - ( <span class="node_title" data-node-id="'+
-                        node.id +'">' + node.title.name + '</span> )'
+                        node.id +'">' + node.title + '</span> )'
                     );
                 }
             });
