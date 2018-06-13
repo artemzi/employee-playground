@@ -15,5 +15,6 @@ $factory->define(Employee::class, function (Faker $faker) {
         'parent_id' => null,
         'hire_date' => Carbon::now(),
         'salary' => $faker->numberBetween($min = 20000, $max = 150000),
+        'load_on_demand' => true
     ];
 });
