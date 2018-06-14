@@ -56,10 +56,16 @@ class EmployeeController extends Controller
 
     public function update(EmployeeRequest $request, Employee $employee)
     {
+        $children = $employee->children()->get()->toArray();
+        $parent = Employee::whereKey($request['parent'])->get()->toArray();
+        if ($this->hasChild($parent, $children)) return redirect()
+            ->back()
+            ->with('wrongParent', 'Parent should not be a descendant.');
+
         if (isset($request['new__parent'])) {
             DB::beginTransaction();
             try {
-                foreach ($employee->children()->get() as $child) {
+                foreach ($children as $child) {
                     $child->parent_id = $request['new__parent'];
                     $child->save();
                 }
@@ -121,5 +127,14 @@ class EmployeeController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function hasChild($a, $b)
+    {
+        foreach ($b as $k => $v) {
+            if ($a[0] === $v) return true;
+        }
+
+        return false;
     }
 }

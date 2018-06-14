@@ -7,6 +7,11 @@
                 <div class="card-header"><h3>Edit:</h3></div>
 
                 <div class="card-body">
+                    @if (\Session::has('wrongParent'))
+                        <div class="alert alert-danger">
+                            <span>{!! \Session::get('wrongParent') !!}</span>
+                        </div>
+                    @endif
             <form method="POST" action="{{ route('employees.update', $employee) }}">
                 @csrf
                 @method('PUT')
