@@ -5,6 +5,7 @@ namespace EmployeeDirectory\Http\Controllers\Employee;
 use EmployeeDirectory\Entity\Employee;
 use Illuminate\Http\Request;
 use EmployeeDirectory\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -36,6 +37,7 @@ class HomeController extends Controller
 
     public function move()
     {
+        if (Auth::guest()) return redirect('/login');
     	// start transaction
     	DB::beginTransaction();
     	switch(request()->action) {

@@ -47,10 +47,11 @@
                 "node": 1,
             }
         }).then(function (response) {
+            let draggable = {{ $authUser ? 1 : 0 }};
             $tree.tree({
                 data: response.data,
                 selectable: false,
-                dragAndDrop: true,
+                dragAndDrop: draggable,
                 autoOpen: 0, // auto open first level
                 saveState: false,
                 useContextMenu: false,

@@ -161,6 +161,7 @@ return [
         EmployeeDirectory\Providers\RouteServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        EmployeeDirectory\Providers\ComposerServiceProvider::class,
     ],
 
     /*
