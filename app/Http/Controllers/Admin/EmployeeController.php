@@ -58,11 +58,17 @@ class EmployeeController extends Controller
     {
         $children = $employee->children()->get()->toArray();
         $parent = Employee::whereKey($request['parent'])->get()->toArray();
+
         if ($this->hasChild($parent, $children)) return redirect()
             ->back()
-            ->with('wrongParent', 'Parent should not be a descendant.');
+            ->with('wrongParent', 'A child cannot be the parent for his current parent.');
 
         if (isset($request['new__parent'])) {
+            $parent = Employee::whereKey($request['new__parent'])->get()->toArray();
+            if ($this->hasChild($parent, $children)) return redirect()
+                ->back()
+                ->with('wrongParent', 'A child cannot be the parent for his current parent.');
+
             DB::beginTransaction();
             try {
                 foreach ($children as $child) {
